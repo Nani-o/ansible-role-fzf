@@ -1,0 +1,11 @@
+---
+- hosts: container
+  tasks:
+    - name: Check fzf executable file
+      stat:
+        path: /usr/local/bin/fzf
+      register: executable
+
+    - name: Fail if not finding executable fzf
+      fail:
+      when: "not (executable.isreg and executable.executable)"
