@@ -8,4 +8,7 @@
 
     - name: Fail if not finding executable fzf
       fail:
-      when: "not (executable.isreg and executable.executable)"
+      when:
+        - not executable.stat.exists
+        - not executable.stat.isreg
+        - not executable.stat.executable
